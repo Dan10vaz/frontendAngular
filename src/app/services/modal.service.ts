@@ -6,13 +6,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ModalService {
 
-  private showModalSource = new BehaviorSubject<{ show: boolean, data: any }>({ show: false, data: null });
+  private showModalSource = new BehaviorSubject<{ show: boolean, data: any, editProduct: boolean }>({ show: false, data: null, editProduct: false });
 
   currentShowModal = this.showModalSource.asObservable();
 
   constructor() { }
 
-  changeShowModal(show: boolean, data: any) {
-    this.showModalSource.next({ show, data });
+  changeShowModal(show: boolean, data: any, editProduct: boolean) {
+    this.showModalSource.next({ show, data, editProduct });
   }
 }
