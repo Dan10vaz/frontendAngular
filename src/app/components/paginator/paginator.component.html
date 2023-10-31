@@ -1,0 +1,65 @@
+<div class="flex justify-center my-4">
+  <nav *ngIf="totalPages > 1" aria-label="Pagination">
+    <ul class="pagination">
+      <li class="page-item" [ngClass]="{ disabled: currentPage == 1 }">
+        <a
+          class="page-link"
+          (click)="onPageChange(1)"
+          [attr.aria-label]="'First Page'"
+          *ngIf="currentPage != 1"
+          >First</a
+        >
+        <span class="page-link cursor-not-allowed" *ngIf="currentPage == 1"
+          >First</span
+        >
+      </li>
+      <li class="page-item" [ngClass]="{ disabled: currentPage == 1 }">
+        <a
+          class="page-link"
+          (click)="onPageChange(currentPage - 1)"
+          [attr.aria-label]="'Previous Page'"
+          *ngIf="currentPage != 1"
+          >Previous</a
+        >
+        <span class="page-link cursor-not-allowed" *ngIf="currentPage == 1"
+          >Previous</span
+        >
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let page of pages"
+        [ngClass]="{ active: page === currentPage }"
+      >
+        <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+      </li>
+      <li class="page-item" [ngClass]="{ disabled: currentPage == totalPages }">
+        <a
+          class="page-link"
+          (click)="onPageChange(currentPage + 1)"
+          [attr.aria-label]="'Next Page'"
+          *ngIf="currentPage != totalPages"
+          >Next</a
+        >
+        <span
+          class="page-link cursor-not-allowed"
+          *ngIf="currentPage == totalPages"
+          >Next</span
+        >
+      </li>
+      <li class="page-item" [ngClass]="{ disabled: currentPage == totalPages }">
+        <a
+          class="page-link"
+          (click)="onPageChange(totalPages)"
+          [attr.aria-label]="'Last Page'"
+          *ngIf="currentPage != totalPages"
+          >Last</a
+        >
+        <span
+          class="page-link cursor-not-allowed"
+          *ngIf="currentPage == totalPages"
+          >Last</span
+        >
+      </li>
+    </ul>
+  </nav>
+</div>

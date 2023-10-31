@@ -110,9 +110,15 @@
               </tr>
             </tbody>
           </table>
+          <app-paginator
+            [currentPage]="currentPage"
+            [totalPages]="totalPages"
+            (pageChange)="onPageChange($event)"
+          ></app-paginator>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <app-modal [titulo]="titulo"></app-modal>

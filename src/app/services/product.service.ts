@@ -32,6 +32,10 @@ export class ProductService {
     return this.http.delete<any>(`${this.apiUrl}products/deleted`, { body: { id } });
   }
 
+  getProductsPaginated(page: number, limit: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}products/?page=${page}&limit=${limit}`);
+  }
+
   // Método para notificar cambios en las peticiones
   notifyProducts() {
     this.productCreatedSource.next(true);

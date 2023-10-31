@@ -3,6 +3,7 @@ import { Product } from 'src/app/interfaces/product';
 import { ModalService } from 'src/app/services/modal.service';
 import { ProductService } from 'src/app/services/product.service';
 
+
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',
@@ -11,6 +12,10 @@ import { ProductService } from 'src/app/services/product.service';
 export class ListProductsComponent implements OnInit {
   titulo: string = ''
   listProducts: Product[] = [];
+  // Propiedades para el paginador
+  currentPage: number = 1; // Página actual
+  itemsPerPage: number = 5; // Cantidad de elementos por página
+  totalPages!: number; // Total de páginas
 
   constructor(private modalService: ModalService, private products: ProductService) { }
 
@@ -49,4 +54,23 @@ export class ListProductsComponent implements OnInit {
       console.log(error)
     })
   }
+
+
+
+  // Método para cambiar de página
+  onPageChange(page: number) {
+    this.currentPage = page;
+    // Lógica para obtener los datos de la página actual
+    this.obtenerDatosTablaPaginador();
+  }
+
+  obtenerDatosTablaPaginador = () => {
+    this.products.getProductsPaginated(this.currentPage, this.itemsPerPage).subscribe(products => {
+      console.log(products);
+      this.listProducts = products.items; // Actualiza los productos en la tabla
+      this.totalPages = products.totalPages; // Actualiza el total de páginas
+    });
+  }
+
+
 }
